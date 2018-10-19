@@ -8,7 +8,8 @@ By passing bytes you can edit with editor
 	var data []byte
 	data = []byte("For example, stringdata hogehogehoge")
 
-	ret, err := editor.Call("vim",data) //[]byte, error (string, []byte)
+	ret, err := editor.Call("vim",data)
+			//[]byte, error := func(string, []byte)
 	if err != nil {
 		return
 	}
