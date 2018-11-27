@@ -18,7 +18,7 @@ func callEditor(editor string, target []byte) ([]byte, error) {
 	}
 	defer os.Remove(f.Name())
 	tfile := f.Name()
-	if err := tmpfile.Close(); err != nil {
+	if err := f.Close(); err != nil {
 		return nil, err
 	}
 
