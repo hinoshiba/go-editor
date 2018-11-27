@@ -12,12 +12,15 @@ func Call(editor string, target []byte) ([]byte, error) {
 }
 
 func callEditor(editor string, target []byte) ([]byte, error) {
-	tdir, err := ioutil.TempDir("/var/tmp/", "editor-go-")
+	f, err := ioutil.TempFile(os.TempDir(), "editor-go-")
 	if err != nil {
 		return nil, err
 	}
-	defer os.RemoveAll(tdir)
-	tfile := tdir + "/tmpfile"
+	defer os.Remove(f.Name())
+	tfile := f.Name()
+	if err := tmpfile.Close(); err != nil {
+		return nil, err
+	}
 
 	if err := writeFile(tfile, &target); err != nil {
 		return nil, err
